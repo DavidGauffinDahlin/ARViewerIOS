@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body { background-color: black; }
+    </style>
+</head>
+
+<body >
+
+
+<script type="module">
+    
+    var realityURL;
+
+    window.addEventListener("load", () => {
+        runAR();
+    });
+
+        
+    function runAR() {
+        if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            console.log("Supports Quick Look");
+
+            const name = new URLSearchParams(window.location.search).get('id');
+            console.log("Product name: " + name);
+
+            realityURL = `https://s3.eu-west-2.amazonaws.com/product.baetes.com/${name}.reality`;
+
+            launchIOSQuickLookAR();
+        } else {
+            console.log("Quick Look not supported");
+        }
+    }
+    
+    function launchIOSQuickLookAR() {
+            
+        document.getElementById("ar").innerHTML += '<a rel="ar" id="ar-link" href=' + realityURL + '> <img/> </a>';
+    
+        console.log("Quick Look Launching");
+
+        document.getElementById("ar-link").click();
+    }
+
+</script>
+
+<div id="ar" class="">
+
+    
+
+</div>
+
+</body>
+</html>
